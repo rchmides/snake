@@ -38,11 +38,11 @@ namespace Snake
 
         public void Move(int offset, Direction direction)
         {
-            if(direction == Direction.LEFT)
+            if (direction == Direction.LEFT)
             {
                 x = x - offset;
             }
-            else if(direction == Direction.RIGHT)
+            else if (direction == Direction.RIGHT)
             {
                 x = x + offset;
             }
@@ -60,6 +60,11 @@ namespace Snake
         {
             sym = ' ';
             Draw();
+        }
+
+        public bool IsHit(Point p)
+        {
+            return p.x == this.x && p.y == this.y;
         }
     }
 }
