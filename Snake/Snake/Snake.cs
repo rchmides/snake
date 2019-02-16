@@ -6,29 +6,17 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class Snake
+    class Snake : Figure
     {
-        static void Main(string[] args)
+        public Snake(Point tail, int length, Direction direction)
         {
-            Console.SetBufferSize(71, 21);
-            Console.SetWindowSize(71, 21);
-
-            Point p1 = new Point(12, 3, '*');
-            p1.Draw();
-
-            HorizontalLine upperLine = new HorizontalLine(1, 70, 0, '+');
-            upperLine.Draw();
-
-            HorizontalLine downLine = new HorizontalLine(1, 70, 20, '+');
-            downLine.Draw();
-
-            VerticalLine leftLine = new VerticalLine(0, 0, 20, '+');
-            leftLine.Draw();
-
-            VerticalLine rightLine = new VerticalLine(71, 0, 20, '+');
-            rightLine.Draw();
-
-            Console.ReadLine();
+            pList = new List<Point>();
+            for (int i = 0; i < length; i++)
+            {
+                Point p = new Point(tail);
+                p.Move(i, direction);
+                pList.Add(p);
+            }
         }
     }
 }
