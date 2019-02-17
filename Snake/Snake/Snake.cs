@@ -58,12 +58,25 @@ namespace Snake
             Point head = getNextPoint();
             if (head.IsHit(food))
             {
+                head.Draw();
                 food.sym = head.sym;
                 pList.Add(food);
                 return true;
             }
             else
                 return false;
+        }
+
+        internal bool FoodOnSnake(int x, int y)
+        {
+            foreach (var p in this.pList)
+            {
+                if (p.x == x && p.y == y)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
