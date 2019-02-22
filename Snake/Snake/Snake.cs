@@ -41,6 +41,17 @@ namespace Snake
             return nextPoint;
         }
 
+        internal bool IsHitTail()
+        {
+            var head = pList.Last();
+            for(int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return false;
+            }
+            return false;
+        }
+
         public void handleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)

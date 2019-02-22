@@ -12,25 +12,25 @@ namespace Snake
         static void Main(string[] args)
         {
 
-            HorizontalLine upperLine = new HorizontalLine(1, 70, 0, '+');
-            HorizontalLine downLine = new HorizontalLine(1, 70, 20, '+');
-            VerticalLine leftLine = new VerticalLine(0, 0, 20, '+');
-            VerticalLine rightLine = new VerticalLine(71, 0, 20, '+');
-            upperLine.Draw();
-            downLine.Draw();
-            leftLine.Draw();
-            rightLine.Draw();
+            Walls walls = new Walls(80, 25);
+            walls.Draw();
 
-            Point p = new Point(8, 10, '*');
+            Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Draw();
 
-            FoodCreator foodCreator = new FoodCreator(71, 21, '$');
+            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
             Point food = foodCreator.CreateFood();
             food.Draw();
+        
 
             while (true)
             {
+                if (snake.IsHitTail())
+                {
+                    break;
+                }
+
                 if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
@@ -43,15 +43,11 @@ namespace Snake
 
                 Thread.Sleep(100);
                 if (Console.KeyAvailable)
-
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.handleKey(key.Key);
                 }
             }
-
-
-
         }
     }
 }
