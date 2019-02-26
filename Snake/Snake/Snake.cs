@@ -44,23 +44,23 @@ namespace Snake
         internal bool IsHitTail()
         {
             var head = pList.Last();
-            for(int i = 0; i < pList.Count - 2; i++)
+            for (int i = 0; i < pList.Count - 2; i++)
             {
                 if (head.IsHit(pList[i]))
-                    return false;
+                    return true;
             }
             return false;
         }
 
         public void handleKey(ConsoleKey key)
         {
-            if (key == ConsoleKey.LeftArrow)
+            if (key == ConsoleKey.LeftArrow && this.direction != Direction.RIGHT)
                 direction = Direction.LEFT;
-            else if (key == ConsoleKey.RightArrow)
+            else if (key == ConsoleKey.RightArrow && this.direction != Direction.LEFT)
                 direction = Direction.RIGHT;
-            if (key == ConsoleKey.UpArrow)
+            if (key == ConsoleKey.UpArrow && this.direction != Direction.DOWN)
                 direction = Direction.UP;
-            else if (key == ConsoleKey.DownArrow)
+            else if (key == ConsoleKey.DownArrow && this.direction != Direction.UP)
                 direction = Direction.DOWN;
         }
 
