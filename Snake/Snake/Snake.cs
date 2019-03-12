@@ -8,7 +8,7 @@ namespace Snake
 {
     class Snake : Figure
     {
-        public Direction direction;
+        Direction direction;
 
         public Snake(Point tail, int length, Direction _direction)
         {
@@ -22,18 +22,18 @@ namespace Snake
             }
         }
 
-        internal void Move()
+        public void Move()
         {
             Point tail = pList.First();
             pList.Remove(tail);
-            Point head = getNextPoint();
+            Point head = GetNextPoint();
             pList.Add(head);
 
             tail.Clear();
             head.Draw();
         }
 
-        public Point getNextPoint()
+        public Point GetNextPoint()
         {
             Point head = pList.Last();
             Point nextPoint = new Point(head);
@@ -41,7 +41,7 @@ namespace Snake
             return nextPoint;
         }
 
-        internal bool IsHitTail()
+        public bool IsHitTail()
         {
             var head = pList.Last();
             for (int i = 0; i < pList.Count - 2; i++)
@@ -52,42 +52,30 @@ namespace Snake
             return false;
         }
 
-        public void handleKey(ConsoleKey key)
+        public void HandleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow && this.direction != Direction.RIGHT)
                 direction = Direction.LEFT;
             else if (key == ConsoleKey.RightArrow && this.direction != Direction.LEFT)
                 direction = Direction.RIGHT;
-            if (key == ConsoleKey.UpArrow && this.direction != Direction.DOWN)
-                direction = Direction.UP;
             else if (key == ConsoleKey.DownArrow && this.direction != Direction.UP)
                 direction = Direction.DOWN;
+            else if (key == ConsoleKey.UpArrow && this.direction != Direction.DOWN)
+                direction = Direction.UP;
         }
 
-        internal bool Eat(Point food)
+        public bool Eat(Point food)
         {
-            Point head = getNextPoint();
+            Point head = GetNextPoint();
             if (head.IsHit(food))
             {
-                head.Draw();
                 food.sym = head.sym;
                 pList.Add(food);
+                head.Draw();
                 return true;
             }
             else
                 return false;
-        }
-
-        internal bool FoodOnSnake(int x, int y)
-        {
-            foreach (var p in this.pList)
-            {
-                if (p.x == x && p.y == y)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

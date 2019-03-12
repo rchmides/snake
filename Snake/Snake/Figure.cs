@@ -10,7 +10,7 @@ namespace Snake
     {
         protected List<Point> pList;
 
-        public virtual void Draw()
+        public void Draw()
         {
             foreach (Point p in pList)
             {
@@ -28,11 +28,11 @@ namespace Snake
             return false;
         }
 
-        internal bool IsHit(Point point)
+        private bool IsHit(Point point)
         {
             foreach (var p in pList)
             {
-                if (p.IsHit(p))
+                if (p.IsHit(point))
                     return true;
             }
             return false;
